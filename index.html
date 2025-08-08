@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TypeMaster - Advanced Typing Practice</title>
+
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet"/>
+<link rel="shortcut icon" href="image/logo.png" type="image/x-icon">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/intel-one-mono@5.0.21/index.min.css" rel="stylesheet">
+
+
+
+
+<script src="https://cdn.tailwindcss.com/3.4.16"></script><script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        primary: '#00D2FF',
+        secondary: '#3A6CF4',
+        dark: {
+          100: '#1a1a1a',
+          200: '#2d2d2d',
+          300: '#3d3d3d',
+          400: '#4d4d4d'
+        }
+      },
+      borderRadius: {
+        'none': '0px',
+        'sm': '4px',
+        DEFAULT: '8px',
+        'md': '12px',
+        'lg': '16px',
+        'xl': '20px',
+        '2xl': '24px',
+        '3xl': '32px',
+        'full': '9999px',
+        'button': '8px'
+      },
+      fontFamily: {
+        mono: ['JetBrains Mono', 'monospace'],
+        sans: ['Inter', 'sans-serif']
+      }
+    }
+  }
+};
+</script><link href="style.css" rel="stylesheet"/></head>
+<body class="bg-dark-100 text-white font-sans min-h-screen overflow-x-hidden">
+<!-- Floating Background Elements -->
+<div class="fixed inset-0 pointer-events-none overflow-hidden">
+<div class="floating-key absolute top-20 left-10 w-12 h-12 bg-dark-300 rounded-lg flex items-center justify-center text-primary font-mono">A</div>
+<div class="floating-key absolute top-32 right-20 w-12 h-12 bg-dark-300 rounded-lg flex items-center justify-center text-primary font-mono">S</div>
+<div class="floating-key absolute top-60 left-1/4 w-12 h-12 bg-dark-300 rounded-lg flex items-center justify-center text-primary font-mono">D</div>
+<div class="floating-key absolute bottom-40 right-1/3 w-12 h-12 bg-dark-300 rounded-lg flex items-center justify-center text-primary font-mono">F</div>
+<div class="floating-key absolute bottom-20 left-1/2 w-12 h-12 bg-dark-300 rounded-lg flex items-center justify-center text-primary font-mono">123</div>
+<div class="floating-key absolute top-1/2 right-10 w-12 h-12 bg-dark-300 rounded-lg flex items-center justify-center text-primary font-mono">@</div>
+</div>
+<!-- Header -->
+<header class="relative z-10 px-6 py-4">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<h1 class="text-2xl font-bold text-primary" style="font-family: 'Intel One Mono', monospace; font: size 160px;;">
+  Type Master <i class="fa-solid fa-keyboard"></i>
+</h1>
+
+<div class="flex items-center space-x-4">
+<button class="w-10 h-10 flex items-center justify-center bg-dark-200 rounded-lg hover:bg-dark-300 transition-colors" id="settingsBtn">
+<i class="ri-settings-3-line text-lg"></i>
+</button>
+<button class="w-10 h-10 flex items-center justify-center bg-dark-200 rounded-lg hover:bg-dark-300 transition-colors">
+<i class="ri-volume-up-line text-lg"></i>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="relative z-10 px-6 pb-8">
+<div class="max-w-6xl mx-auto">
+<!-- Timer Selection -->
+<div class="mb-8">
+<h2 class="text-lg font-semibold mb-4">Select Practice Duration</h2>
+<div class="flex flex-wrap gap-3">
+<button class="time-btn px-6 py-3 bg-dark-200 rounded-button hover:bg-dark-300 transition-all duration-200 border-2 border-transparent" data-time="15">15s</button>
+<button class="time-btn px-6 py-3 bg-dark-200 rounded-button hover:bg-dark-300 transition-all duration-200 border-2 border-transparent" data-time="30">30s</button>
+<button class="time-btn px-6 py-3 bg-dark-200 rounded-button hover:bg-dark-300 transition-all duration-200 border-2 border-transparent" data-time="60">60s</button>
+<button class="time-btn px-6 py-3 bg-dark-200 rounded-button hover:bg-dark-300 transition-all duration-200 border-2 border-transparent" data-time="120">120s</button>
+<div class="flex items-center gap-2">
+<button class="time-btn px-6 py-3 bg-dark-200 rounded-button hover:bg-dark-300 transition-all duration-200 border-2 border-transparent" id="customBtn">Custom</button>
+<input class="hidden w-20 px-3 py-2 bg-dark-200 border border-dark-300 rounded-lg text-white text-center" id="customTime" max="600" min="5" placeholder="300" type="number"/>
+<span class="hidden text-sm text-gray-400" id="customLabel">seconds</span>
+</div>
+</div>
+</div>
+<!-- Stats Dashboard -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+<div class="bg-dark-200 rounded-xl p-4">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm text-gray-400">WPM</span>
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-speed-line text-primary"></i>
+</div>
+</div>
+<div class="text-2xl font-bold text-primary" id="wpmDisplay">0</div>
+</div>
+<div class="bg-dark-200 rounded-xl p-4">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm text-gray-400">Accuracy</span>
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-target-line text-green-400"></i>
+</div>
+</div>
+<div class="text-2xl font-bold text-green-400" id="accuracyDisplay">100%</div>
+</div>
+<div class="bg-dark-200 rounded-xl p-4">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm text-gray-400">Characters</span>
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-keyboard-line text-yellow-400"></i>
+</div>
+</div>
+<div class="text-2xl font-bold text-yellow-400" id="charDisplay">0/0</div>
+</div>
+<div class="bg-dark-200 rounded-xl p-4">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm text-gray-400">Time</span>
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-timer-line text-red-400"></i>
+</div>
+</div>
+<div class="text-2xl font-bold text-red-400" id="timeDisplay">0s</div>
+</div>
+</div>
+<!-- Typing Area -->
+<div class="bg-dark-200 rounded-2xl p-6 mb-6">
+<!-- Progress Bar -->
+<div class="mb-4">
+<div class="flex justify-between text-sm text-gray-400 mb-2">
+<span>Progress</span>
+<span id="progressPercent">0%</span>
+</div>
+<div class="w-full bg-dark-300 rounded-full h-2">
+<div class="bg-primary h-2 rounded-full transition-all duration-300" id="progressBar" style="width: 0%"></div>
+</div>
+</div>
+<!-- Text Display -->
+<div class="relative">
+<div class="font-mono text-lg leading-relaxed p-4 bg-dark-300 rounded-lg min-h-32 custom-scrollbar overflow-y-auto max-h-48 whitespace-pre-wrap relative" id="textDisplay"></div>
+<div class="typing-cursor absolute bg-primary w-0.5 h-6 transition-all duration-50" id="cursor" style="display:none"></div>
+<input autocomplete="off" class="absolute inset-0 opacity-0 cursor-default" disabled="" id="typingInput" spellcheck="false" type="text">
+</input></div>
+<!-- Control Buttons -->
+<div class="flex justify-center mt-6 space-x-4">
+<button class="px-8 py-3 bg-primary text-dark-100 rounded-button font-semibold hover:bg-blue-400 transition-colors !rounded-button whitespace-nowrap" id="startBtn">
+<div class="w-6 h-6 flex items-center justify-center mr-2 inline-flex">
+<i class="ri-play-fill"></i>
+</div>
+Start Practice
+</button>
+<button class="px-6 py-3 bg-dark-300 text-white rounded-button font-semibold hover:bg-dark-400 transition-colors !rounded-button whitespace-nowrap" id="resetBtn">
+<div class="w-6 h-6 flex items-center justify-center mr-2 inline-flex">
+<i class="ri-refresh-line"></i>
+</div>
+Reset
+</button>
+</div>
+</div>
+<!-- Settings Modal -->
+<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden" id="settingsModal">
+<div class="bg-dark-200 rounded-2xl p-8 max-w-xl w-full mx-4">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-2xl font-bold">Settings</h3>
+<button class="w-8 h-8 flex items-center justify-center bg-dark-300 rounded-lg hover:bg-dark-400 transition-colors" id="closeSettingsBtn">
+<i class="ri-close-line"></i>
+</button>
+</div>
+<div class="space-y-6">
+<!-- Difficulty Level -->
+<div>
+<label class="text-gray-400 block mb-2">Difficulty Level</label>
+<div class="flex space-x-3">
+<button class="flex-1 px-4 py-2 bg-dark-300 rounded-button hover:bg-dark-400 transition-colors" id="easyBtn">Easy</button>
+<button class="flex-1 px-4 py-2 bg-primary text-dark-100 rounded-button" id="mediumBtn">Medium</button>
+<button class="flex-1 px-4 py-2 bg-dark-300 rounded-button hover:bg-dark-400 transition-colors" id="hardBtn">Hard</button>
+</div>
+</div>
+<!-- Font Size -->
+<div>
+<label class="text-gray-400 block mb-2">Font Size</label>
+<input class="w-full" id="fontSizeRange" max="24" min="12" type="range" value="18"/>
+<div class="flex justify-between text-sm mt-1">
+<span>12px</span>
+<span id="fontSizeValue">18px</span>
+<span>24px</span>
+</div>
+</div>
+<!-- Theme -->
+<div>
+<label class="text-gray-400 block mb-2">Theme</label>
+<div class="grid grid-cols-3 gap-3">
+<button class="theme-btn h-10 rounded-lg bg-primary"></button>
+<button class="theme-btn h-10 rounded-lg bg-green-400"></button>
+<button class="theme-btn h-10 rounded-lg bg-purple-400"></button>
+</div>
+</div>
+<!-- Sound Effects -->
+<div class="flex items-center justify-between">
+<label class="text-gray-400">Sound Effects</label>
+<div class="relative inline-block w-12 h-6 rounded-full bg-dark-300">
+<input class="sr-only" id="soundToggle" type="checkbox"/>
+<div class="block w-12 h-6 rounded-full bg-dark-300 cursor-pointer"></div>
+<div class="dot absolute left-1 top-1 w-4 h-4 rounded-full transition-transform bg-gray-400"></div>
+</div>
+</div>
+<!-- Keyboard Layout -->
+<div>
+<label class="text-gray-400 block mb-2">Keyboard Layout</label>
+<select class="w-full px-4 py-2 bg-dark-300 rounded-lg border border-dark-400 focus:outline-none focus:border-primary" id="keyboardLayout">
+<option value="qwerty">QWERTY</option>
+<option value="dvorak">Dvorak</option>
+<option value="colemak">Colemak</option>
+</select>
+</div>
+<!-- Practice Mode -->
+<div>
+<label class="text-gray-400 block mb-2">Practice Mode</label>
+<div class="grid grid-cols-2 gap-3">
+<button class="px-4 py-2 bg-dark-300 rounded-button hover:bg-dark-400 transition-colors" id="wordMode">Word Mode</button>
+<button class="px-4 py-2 bg-primary text-dark-100 rounded-button" id="sentenceMode">Sentence Mode</button>
+</div>
+</div>
+</div>
+<div class="flex justify-end mt-8">
+<button class="px-6 py-3 bg-primary text-dark-100 rounded-button font-semibold hover:bg-blue-400 transition-colors" id="applySettingsBtn">Apply Settings</button>
+</div>
+</div>
+</div>
+<!-- Results Modal -->
+<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden" id="resultsModal">
+<div class="bg-dark-200 rounded-2xl p-8 max-w-md w-full mx-4">
+<div class="text-center">
+<div class="w-16 h-16 flex items-center justify-center bg-primary rounded-full mx-auto mb-4">
+<i class="ri-trophy-fill text-2xl text-dark-100"></i>
+</div>
+<h3 class="text-2xl font-bold mb-6">Practice Complete!</h3>
+<div class="space-y-4 mb-6">
+<div class="flex justify-between">
+<span class="text-gray-400">Words Per Minute:</span>
+<span class="font-bold text-primary" id="finalWPM">0</span>
+</div>
+<div class="flex justify-between">
+<span class="text-gray-400">Accuracy:</span>
+<span class="font-bold text-green-400" id="finalAccuracy">0%</span>
+</div>
+<div class="flex justify-between">
+<span class="text-gray-400">Characters Typed:</span>
+<span class="font-bold text-yellow-400" id="finalChars">0</span>
+</div>
+<div class="flex justify-between">
+<span class="text-gray-400">Errors:</span>
+<span class="font-bold text-red-400" id="finalErrors">0</span>
+</div>
+</div>
+<div class="flex space-x-3">
+<button class="flex-1 px-4 py-3 bg-primary text-dark-100 rounded-button font-semibold hover:bg-blue-400 transition-colors !rounded-button whitespace-nowrap" id="tryAgainBtn">Try Again</button>
+<button class="flex-1 px-4 py-3 bg-dark-300 text-white rounded-button font-semibold hover:bg-dark-400 transition-colors !rounded-button whitespace-nowrap" id="closeResultsBtn">Close</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+<script src="script.js"></script></body>
+</html>

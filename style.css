@@ -1,0 +1,311 @@
+:where([class^="ri-"])::before { content: "\f3c2"; }
+
+:root {
+  --primary-color: #4ed5f3;
+}
+
+input[type="range"] {
+-webkit-appearance: none;
+height: 6px;
+background: #212020;
+border-radius: 3px;
+outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+-webkit-appearance: none;
+width: 16px;
+height: 16px;
+background: var(--primary-color);
+border-radius: 50%;
+cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+width: 16px;
+height: 16px;
+background: var(--primary-color);
+border-radius: 50%;
+cursor: pointer;
+border: none;
+}
+
+select {
+appearance: none;
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+background-repeat: no-repeat;
+background-position: right 1rem center;
+background-size: 1em;
+padding-right: 2.5rem;
+}
+
+.floating-key {
+animation: float 3s ease-in-out infinite;
+}
+
+.floating-key:nth-child(2n) {
+animation-delay: -1s;
+}
+
+.floating-key:nth-child(3n) {
+animation-delay: -2s;
+}
+
+@keyframes float {
+0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
+50% { transform: translateY(-20px) rotate(5deg); opacity: 0.7; }
+}
+
+.typing-cursor {
+animation: blink 1s infinite;
+background-color: var(--primary-color);
+}
+
+@keyframes blink {
+0%, 50% { opacity: 1; }
+51%, 100% { opacity: 0; }
+}
+
+.progress-circle {
+transform: rotate(-90deg);
+}
+
+/* Enhanced error character styling */
+.error-char {
+background-color: rgba(255, 107, 107, 0.4) !important;
+color: #ff6b6b !important;
+border-radius: 3px;
+position: relative;
+}
+
+.error-char::after {
+content: '';
+position: absolute;
+bottom: -2px;
+left: 0;
+right: 0;
+height: 2px;
+background-color: #ff6b6b;
+border-radius: 1px;
+}
+
+/* Enhanced correct character styling */
+.correct-char {
+color: #4ade80 !important;
+background-color: rgba(74, 222, 128, 0.1);
+border-radius: 3px;
+position: relative;
+}
+
+.current-char {
+background-color: rgba(0, 210, 255, 0.3);
+border-radius: 3px;
+position: relative;
+}
+
+.current-char::before {
+content: '';
+position: absolute;
+top: -2px;
+left: 0;
+right: 0;
+height: 2px;
+background-color: var(--primary-color);
+border-radius: 1px;
+animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+0%, 100% { opacity: 0.5; }
+50% { opacity: 1; }
+}
+
+.text-fade-in {
+animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(10px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+.particle {
+position: absolute;
+pointer-events: none;
+animation: particle 1s ease-out forwards;
+color: var(--primary-color) !important;
+}
+
+@keyframes particle {
+0% { opacity: 1; transform: scale(1) translateY(0); }
+100% { opacity: 0; transform: scale(0.5) translateY(-30px); }
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+background: #2d2d2d;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+background: var(--primary-color);
+border-radius: 2px;
+}
+
+/* Input field error styling */
+.border-red-500 {
+border-color: #ef4444 !important;
+box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2) !important;
+}
+
+/* Primary color classes that should use CSS variables */
+.bg-primary {
+background-color: var(--primary-color) !important;
+}
+
+.text-primary {
+color: var(--primary-color) !important;
+}
+
+.border-primary {
+border-color: var(--primary-color) !important;
+}
+
+/* Progress bar styling */
+#progressBar {
+background-color: var(--primary-color) !important;
+transition: all 0.3s ease;
+}
+
+/* Theme-specific floating keys */
+.floating-key {
+color: var(--primary-color);
+}
+
+/* Sound toggle dot styling */
+.dot {
+transition: all 0.3s ease;
+}
+
+.dot.bg-primary {
+background-color: var(--primary-color) !important;
+}
+
+/* Enhanced hover effects */
+.time-btn:hover,
+button:hover {
+transform: translateY(-1px);
+transition: all 0.2s ease;
+}
+
+.theme-btn {
+transition: all 0.2s ease;
+cursor: pointer;
+}
+
+.theme-btn:hover {
+transform: scale(1.05);
+}
+
+/* Settings modal animations */
+#settingsModal {
+backdrop-filter: blur(4px);
+}
+
+#settingsModal > div {
+animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+from { opacity: 0; transform: scale(0.9) translateY(-20px); }
+to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Results modal animations */
+#resultsModal > div {
+animation: bounceIn 0.5s ease-out;
+}
+
+@keyframes bounceIn {
+0% { opacity: 0; transform: scale(0.3); }
+50% { opacity: 1; transform: scale(1.05); }
+70% { transform: scale(0.9); }
+100% { opacity: 1; transform: scale(1); }
+}
+
+/* Additional styling for better visual feedback */
+#textDisplay span {
+transition: all 0.2s ease;
+padding: 1px 2px;
+margin: 0 1px;
+}
+
+#textDisplay span:hover {
+background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Keyboard layout specific styling */
+.keyboard-layout-indicator {
+font-size: 12px;
+opacity: 0.7;
+text-transform: uppercase;
+letter-spacing: 1px;
+}
+
+/* Practice mode indicators */
+.mode-indicator {
+display: inline-flex;
+align-items: center;
+gap: 4px;
+}
+
+.mode-indicator::before {
+content: '';
+width: 6px;
+height: 6px;
+border-radius: 50%;
+background-color: var(--primary-color);
+}
+
+/* Responsive design improvements */
+@media (max-width: 768px) {
+.floating-key {
+display: none;
+}
+  
+#textDisplay {
+font-size: 16px !important;
+padding: 16px;
+}
+  
+.grid.grid-cols-1.md\\:grid-cols-4 {
+grid-template-columns: repeat(2, 1fr);
+gap: 8px;
+}
+}
+
+/* Dark theme enhancements */
+body {
+background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+}
+
+/* Settings panel styling */
+.settings-section {
+border-bottom: 1px solid #3d3d3d;
+padding-bottom: 16px;
+margin-bottom: 16px;
+}
+
+.settings-section:last-child {
+border-bottom: none;
+margin-bottom: 0;
+}
+
+/* Dynamic primary color for current character */
+.current-char {
+background-color: rgba(0, 210, 255, 0.3);
+border-radius: 3px;
+position: relative;
+}
